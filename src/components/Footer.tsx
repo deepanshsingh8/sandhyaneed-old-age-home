@@ -75,8 +75,7 @@ const Footer = () => {
         <div className="border-t border-sandhya-lightGray pt-6 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
           <p>&copy; {new Date().getFullYear()} Sandhyaneed Old Age Home. All rights reserved.</p>
           <p className="mt-2 md:mt-0 flex items-center">
-            Made with <span className="text-red-500 px-1">❤️</span> by 
-            <a href="https://flux8labs.com" target="_blank" rel="noopener noreferrer" className="ml-1 text-sandhya-black hover:underline font-medium">Flux8labs</a>
+            A CSR initiative by <span className="ml-1 text-sandhya-black font-medium">NK Shikshan Sankul</span>
           </p>
         </div>
       </div>
