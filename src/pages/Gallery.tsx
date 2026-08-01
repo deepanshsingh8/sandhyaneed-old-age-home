@@ -24,7 +24,8 @@ const galleryImages = [
   { src: "/img/room/tv.webp", caption: "TV Cabinet", category: "rooms" },
   { src: "/img/room/ac.webp", caption: "AC Rooms", category: "rooms" },
   { src: "/img/room/washroom.webp", caption: "Washroom", category: "rooms" },
-  
+  { src: "/img/room/twin-room.webp", caption: "Twin-bed shared room", category: "rooms" },
+
   // Activities
   { src: "/img/events/aarti.webp", caption: "Aarti in Temple", category: "activities" },
   { src: "/img/events/tour.webp", caption: "tour", category: "activities" },
@@ -34,7 +35,8 @@ const galleryImages = [
   { src: "/img/events/celebrate2.webp", caption: "Cultural program", category: "activities" },
   { src: "/img/events/celebrate.webp", caption: "Cultural program", category: "activities" },
   { src: "/img/events/activity2.webp", caption: "Cultural program", category: "activities" },
-  
+  { src: "/img/homepage/group-photo.webp", caption: "Our residents and family", category: "activities" },
+
   // Facilities
   { src: "/img/room/dining-hall.webp", caption: "Dining hall", category: "facilities" },
   { src: "/img/faci/library.webp", caption: "Library", category: "facilities" },
@@ -43,6 +45,7 @@ const galleryImages = [
   { src: "/img/faci/gym2.webp", caption: "Workout Machine", category: "facilities" },
   { src: "/img/faci/transport.webp", caption: "Transportation", category: "facilities" },
   { src: "/img/faci/ramp.webp", caption: "Ramp for wheelchair", category: "facilities" },
+  { src: "/img/faci/gym3.webp", caption: "Exercise and yoga area", category: "facilities" },
 
   // Garden
   { src: "/img/garden/view.webp", caption: "Sandhya Need", category: "garden" },
@@ -52,6 +55,7 @@ const galleryImages = [
   { src: "/img/garden/garden3.webp", caption: "Walking path", category: "garden" },
   { src: "/img/garden/garden4.webp", caption: "Walking path", category: "garden" },
   { src: "/img/garden/garden5.webp", caption: "Seating area", category: "garden" },
+  { src: "/img/garden/garden6.webp", caption: "Garden and temple view", category: "garden" },
   
   // Health Checkup
   { src: "/img/health/health1.webp", caption: "Weekly checkupss", category: "health-checkup" },

@@ -9,8 +9,8 @@ const MissionSection = () => {
             <div className="relative">
               <div className="aspect-w-4 aspect-h-3 rounded-lg overflow-hidden">
                 <img 
-                  src="/img/homepage/innogration.webp" 
-                  alt="Comfortable living space at Sandhyaneed - Best Old Age Home in Rajasthan" 
+                  src="/img/homepage/inauguration.webp"
+                  alt="Inauguration of Sandhyaneed - Best Old Age Home in Rajasthan"
                   className="object-cover h-full w-full rounded-lg shadow-md"
                 />
               </div>

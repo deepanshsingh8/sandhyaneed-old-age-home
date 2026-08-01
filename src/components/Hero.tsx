@@ -17,8 +17,8 @@ const Hero = () => {
 
   const sections = [
     { title: "Peaceful Living", subtitle: "Serene environment for restful retirement", image: "/img/homepage/hero1.webp", color: "from-orange-500/20 to-orange-600/30", icon: <Sun className="h-8 w-8" /> },
-    { title: "Vibrant Community", subtitle: "Foster meaningful connections and friendships", image: "img/homepage/hero2.webp", color: "from-purple-500/20 to-purple-600/30", icon: <Coffee className="h-8 w-8" /> },
-    { title: "Compassionate Care", subtitle: "Professional staff dedicated to well-being", image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=2940&auto=format&fit=crop", color: "from-green-500/20 to-green-600/30", icon: <Leaf className="h-8 w-8" /> }
+    { title: "Vibrant Community", subtitle: "Foster meaningful connections and friendships", image: "/img/homepage/hero2.webp", color: "from-purple-500/20 to-purple-600/30", icon: <Coffee className="h-8 w-8" /> },
+    { title: "Compassionate Care", subtitle: "Professional staff dedicated to well-being", image: "/img/homepage/community-greeting.webp", color: "from-green-500/20 to-green-600/30", icon: <Leaf className="h-8 w-8" /> }
   ];
 
   const contactInfo = [

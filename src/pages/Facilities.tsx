@@ -45,7 +45,7 @@ const facilities = [
 // Room data
 const rooms = [
   { type: "Flat", image: "/img/room/flat.webp", description: "Self-contained living with privacy and independence" },
-  { type: "Suite", image: "img/room/suite.webp", description: "Premium accommodations with enhanced amenities" },
+  { type: "Suite", image: "/img/room/suite.webp", description: "Premium accommodations with enhanced amenities" },
   { type: "Double Room", image: "/img/room/doublebed.webp", description: "Comfortable shared spaces for couples" }
 ];
 
