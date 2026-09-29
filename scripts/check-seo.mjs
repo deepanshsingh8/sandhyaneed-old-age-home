@@ -90,7 +90,6 @@ const notFound = await readFile("dist/404.html", "utf8");
 assert.match(notFound, /name="robots" content="noindex, follow"/);
 const robots = await readFile("dist/robots.txt", "utf8");
 assert.ok(robots.includes(`Sitemap: ${new URL(urls[0]).origin}/sitemap.xml`));
-const hosting = await readFile("netlify.toml", "utf8");
 const vercel = JSON.parse(await readFile("vercel.json", "utf8"));
 assert.equal(vercel.framework, "vite");
 assert.equal(vercel.installCommand, "npm ci");
@@ -99,28 +98,16 @@ assert.equal(vercel.outputDirectory, "dist");
 assert.equal(vercel.cleanUrls, true, "Vercel serves each route's own HTML");
 assert.equal(vercel.trailingSlash, false);
 assert.ok(!vercel.rewrites?.length && !vercel.routes, "Preserve Vercel filesystem routing and true 404 responses");
-assert.match(hosting, /to = "\/404.html"\s+status = 404/);
-const redirects = [...hosting.matchAll(/\[\[redirects\]\]\s+([\s\S]*?)(?=\[\[|$)/g)].map(([, block]) => ({
-  from: block.match(/from = "([^"]+)"/)?.[1],
-  to: block.match(/to = "([^"]+)"/)?.[1],
-  status: Number(block.match(/status = (\d+)/)?.[1]),
-}));
 for (const [from, to] of Object.entries({
   "/cookies": "/privacy#cookies",
   "/disclaimer": "/terms#website-content",
   "/copyright": "/terms#copyright",
   "/refund-cancellation": "/legal#cancellations-refunds",
 })) {
-  const index = redirects.findIndex(rule => rule.from === from && rule.to === to && rule.status === 301);
-  assert.ok(index >= 0 && index < redirects.findIndex(rule => rule.from === "/*"), `Legacy redirect before 404: ${from}`);
   assert.ok(vercel.redirects.some(rule => rule.source === from && rule.destination === to && rule.permanent === true), `Vercel legacy redirect: ${from}`);
   const [path, id] = to.split("#");
   const page = await readFile(resolve("dist", `${path.slice(1)}.html`), "utf8");
   assert.ok(page.includes(`id="${id}"`), `Redirect anchor exists: ${to}`);
-}
-for (const path of legalPaths) {
-  assert.ok(redirects.some(rule => rule.from === path && rule.to === `${path}.html` && rule.status === 200), `Serve static legal route: ${path}`);
-  assert.ok(redirects.some(rule => rule.from === `${path}.html` && rule.to === path && rule.status === 301), `Canonical legal route redirect: ${path}`);
 }
 const favicon = await readFile(resolve("dist", "favicon.ico"));
 assert.equal(favicon.readUInt16LE(2), 1, "Valid ICO format");
