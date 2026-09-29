@@ -1,19 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Sun, Leaf, Coffee, MapPin, Phone, Clock, ExternalLink } from "lucide-react";
+import { Sun, Leaf, Coffee, MapPin, Phone, Clock, ExternalLink, Pause, Play } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import logoImage from '/img/main-logo.webp';
+import { useReducedMotion } from "framer-motion";
+import { site } from "@/lib/site";
 
 const Hero = () => {
-  const [loaded, setLoaded] = useState(false), 
-        [activeSection, setActiveSection] = useState(0), 
+  const [loaded, setLoaded] = useState(false),
+        [activeSection, setActiveSection] = useState(0),
         navigate = useNavigate();
-  
+  const [paused, setPaused] = useState(false);
+  const reducedMotion = useReducedMotion();
+
   useEffect(() => {
     setLoaded(true);
+    if (paused || reducedMotion) return;
     const timer = setTimeout(() => setActiveSection(prev => (prev + 1) % 3), 4000);
     return () => clearTimeout(timer);
-  }, [activeSection]);
+  }, [activeSection, paused, reducedMotion]);
 
   const sections = [
     { title: "Peaceful Living", subtitle: "Serene environment for restful retirement", image: "/img/homepage/hero1.webp", color: "from-orange-500/20 to-orange-600/30", icon: <Sun className="h-8 w-8" /> },
@@ -22,86 +26,81 @@ const Hero = () => {
   ];
 
   const contactInfo = [
-    { icon: <MapPin className="h-5 w-5" />, label: "VPO-Dhodsar Jaipur-Sikar Highway", title: "Location", isLink: true, href: "https://maps.app.goo.gl/Xq9AU7hc2Hp7UoVP8", ariaLabel: "View our location on Google Maps" },
-    { icon: <Phone className="h-5 w-5" />, label: "+91 96801 47319", title: "Contact" },
-    { icon: <Clock className="h-5 w-5" />, label: "Tours daily: 9 AM - 5 PM", title: "Visit Us" }
-  ];
-
-  const avatars = [
-    "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop", 
-    "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop", 
-    "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop"
+    { icon: <MapPin className="h-5 w-5" />, label: site.streetAddress, title: "Location", href: site.mapsUrl, external: true, ariaLabel: "View our location on Google Maps" },
+    { icon: <Phone className="h-5 w-5" />, label: site.phone, title: "Contact", href: site.phoneHref, external: false, ariaLabel: "Call Sandhyaneed" },
+    { icon: <Clock className="h-5 w-5" />, label: site.officeHours, title: "Office Hours" },
+    { icon: <Clock className="h-5 w-5" />, label: site.visitingHours, title: "Visiting Hours" }
   ];
 
   return (
-    <div className="relative min-h-screen flex flex-col md:flex-row">
+    <div className="relative min-h-[calc(100dvh-4rem)] md:min-h-[calc(100dvh-5rem)] flex flex-col md:flex-row">
       {/* Left section */}
-      <div className="w-full md:w-1/2 bg-gray-50 flex items-center justify-center p-8 md:p-16">
-        <div className={`max-w-lg transition-all duration-1000 ${loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-16"}`}>
-          {/* Logo area */}
-          <div className="mb-12">
-            <div className="flex items-center"><img src={logoImage} alt="Sandhya Need Senior Care Home" className="h-12 w-auto" /></div>
-            <h2 className="text-teal-600 font-medium">SANDHYANEED</h2>
-          </div>
-          
+      <div className="w-full md:w-1/2 bg-gray-50 flex items-center justify-center px-5 py-10 sm:p-8 lg:p-12 xl:p-16">
+        <div className={`hero-content max-w-lg transition-all duration-1000 ${loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-16"}`}>
           {/* Main content */}
-          <h1 className="text-5xl md:text-6xl font-serif font-bold text-gray-800 mb-6 leading-tight">Senior Living <br /><span className="text-teal-600">Reimagined</span></h1>
-          <p className="text-lg text-gray-600 mb-10 leading-relaxed">Sandhyaneed combines homelike comfort, attentive care, and vibrant community life to create an exceptional living experience for seniors.</p>
-          
+          <h1 className="text-[clamp(2.25rem,10vw,3rem)] md:text-4xl lg:text-5xl xl:text-6xl font-serif font-bold text-gray-800 mb-4 md:mb-6 leading-tight">Senior Living <br /><span className="text-teal-600">Reimagined</span></h1>
+          <p className="text-base sm:text-lg text-gray-600 mb-6 md:mb-10 leading-relaxed">Sandhyaneed combines homelike comfort, attentive care, and vibrant community life to create an exceptional living experience for seniors.</p>
+
           {/* Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 mb-16">
-            <Button className="bg-teal-600 hover:bg-teal-700 text-white px-8 py-6 h-auto text-base rounded-xl shadow-lg" onClick={() => navigate("/about")}>About Us</Button>
-            <Button variant="outline" className="border-gray-300 hover:border-teal-500 text-gray-700 hover:text-teal-600 px-8 py-6 h-auto text-base rounded-xl" onClick={() => navigate("/contact")}>Contact Us</Button>
+          <div className="flex flex-row gap-3 sm:gap-4 mb-8 md:mb-16">
+            <Button className="bg-teal-600 hover:bg-teal-700 text-white flex-1 sm:flex-none px-4 py-3 sm:px-8 sm:py-6 min-h-12 h-auto text-sm sm:text-base rounded-xl shadow-lg" onClick={() => navigate("/about")}>About Us</Button>
+            <Button variant="outline" className="border-teal-700 text-teal-700 hover:border-teal-800 hover:bg-teal-800 hover:text-white flex-1 sm:flex-none px-4 py-3 sm:px-8 sm:py-6 min-h-12 h-auto text-sm sm:text-base rounded-xl" onClick={() => navigate("/contact")}>Contact Us</Button>
           </div>
-          
+
           {/* Contact info */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            {contactInfo.map((item, idx) => (
-              <div key={idx} 
-                className={`flex gap-3 items-start ${item.isLink ? "cursor-pointer group" : ""}`}
-                onClick={item.isLink ? () => window.open(item.href, '_blank', 'noopener,noreferrer') : undefined}
-                role={item.isLink ? "button" : undefined}
-                aria-label={item.isLink ? item.ariaLabel : undefined}
-                tabIndex={item.isLink ? 0 : undefined}>
-                <div className="p-2 bg-gray-100 text-teal-600 rounded-lg">{item.icon}</div>
-                <div>
+          <div className="grid grid-cols-2 gap-4 sm:gap-6">
+            {contactInfo.map((item, idx) => {
+              const Tag = item.href ? "a" : "div";
+              return <Tag key={idx}
+                className={`flex min-w-0 gap-2 sm:gap-3 items-start rounded-lg ${item.href ? "group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700" : ""}`}
+                href={item.href}
+                target={item.external ? "_blank" : undefined}
+                rel={item.external ? "noopener noreferrer" : undefined}
+                aria-label={item.ariaLabel}>
+                <div className="p-2 shrink-0 bg-gray-100 text-teal-600 rounded-lg">{item.icon}</div>
+                <div className="min-w-0">
                   <p className="text-sm font-medium text-gray-800">{item.title}</p>
                   <div className="flex items-center">
-                    <p className={`text-sm ${item.isLink ? "text-teal-600 group-hover:underline" : "text-gray-500"}`}>{item.label}</p>
-                    {item.isLink && <ExternalLink className="h-3 w-3 ml-1 text-teal-600" />}
+                    <p className={`text-xs sm:text-sm ${item.href ? "text-teal-600 group-hover:underline" : "text-gray-500"}`}>{item.label}</p>
+                    {item.external && <ExternalLink aria-hidden="true" className="h-3 w-3 ml-1 shrink-0 text-teal-600" />}
                   </div>
                 </div>
-              </div>
-            ))}
+              </Tag>;
+            })}
           </div>
         </div>
       </div>
 
       {/* Right section - image slider */}
-      <div className="w-full md:w-1/2 h-screen md:h-auto relative bg-gray-900">
+      <div className="w-full md:w-1/2 h-[calc(100dvh-4rem)] md:h-[calc(100dvh-5rem)] shrink-0 relative bg-gray-900">
         <div className="relative h-full">
           {sections.map((section, idx) => (
             <div key={idx} className={`absolute inset-0 transition-opacity duration-1000 ${activeSection === idx ? "opacity-100 z-10" : "opacity-0 z-0"}`}>
-              <img src={section.image} alt={`Slide ${idx+1}`} className="absolute inset-0 w-full h-full object-cover" />
+              <img src={section.image} alt={`${section.title} at Sandhyaneed Old Age Home near Jaipur`} loading={idx === 0 ? "eager" : "lazy"} decoding="async" className="absolute inset-0 w-full h-full object-cover" />
               <div className={`absolute inset-0 bg-gradient-to-b ${section.color}`} />
-              <div className="absolute inset-x-0 bottom-0 p-8 md:p-16 text-white">
-                <div className="bg-white/10 backdrop-blur-md p-4 rounded-2xl inline-block mb-4">{section.icon}</div>
-                <h2 className="text-3xl font-bold mb-2">{section.title}</h2>
-                <p className="text-white/80">{section.subtitle}</p>
+              <div className="absolute inset-x-0 bottom-0 p-5 pb-14 sm:p-8 md:p-16 text-white">
+                <div className="bg-white/10 backdrop-blur-md p-3 sm:p-4 rounded-2xl inline-block mb-3 sm:mb-4">{section.icon}</div>
+                <h2 className="text-2xl sm:text-3xl font-bold mb-2">{section.title}</h2>
+                <p className="text-sm sm:text-base text-white/80">{section.subtitle}</p>
               </div>
             </div>
           ))}
         </div>
-        
+
         {/* Slider navigation dots */}
-        <div className="absolute bottom-6 right-6 z-20 flex gap-2">
+        <div className="absolute bottom-3 right-3 sm:bottom-6 sm:right-6 z-20 flex sm:gap-2">
+          <button type="button" disabled={loaded && !!reducedMotion} onClick={() => setPaused(value => !value)} aria-label={loaded && reducedMotion ? "Slideshow paused for reduced motion" : paused ? "Play slideshow" : "Pause slideshow"} className="flex h-11 w-11 items-center justify-center rounded-full bg-black/40 text-white focus-visible:ring-2 focus-visible:ring-white disabled:opacity-60">
+            {paused ? <Play aria-hidden="true" className="h-4 w-4" /> : <Pause aria-hidden="true" className="h-4 w-4" />}
+          </button>
           {sections.map((_, idx) => (
-            <button key={idx} onClick={() => setActiveSection(idx)} 
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${activeSection === idx ? "bg-white scale-125" : "bg-white/50 hover:bg-white/70"}`} 
-              aria-label={`Go to slide ${idx + 1}`} />
+            <button key={idx} onClick={() => setActiveSection(idx)}
+              className="flex h-11 w-11 items-center justify-center rounded-full focus-visible:ring-2 focus-visible:ring-white"
+              aria-label={`Go to slide ${idx + 1}`} aria-pressed={activeSection === idx}>
+              <span className={`w-3 h-3 rounded-full transition-all duration-300 ${activeSection === idx ? "bg-white scale-125" : "bg-white/50 hover:bg-white/70"}`} />
+            </button>
           ))}
         </div>
-        
+
         {/* Since 2015 label */}
         <div className="hidden z-50 lg:flex absolute top-1/2 -left-12 -rotate-90 transform -translate-y-1/2 items-center gap-4">
           <div className="w-16 h-px bg-white"></div>
@@ -109,17 +108,10 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Ratings badge */}
+      {/* Established date */}
       <div className={`hidden md:block absolute left-1/2 top-1/4 transform -translate-x-1/2 -translate-y-1/2 z-20 transition-all duration-1000 ${loaded ? "opacity-100" : "opacity-0"}`}>
-        <div className="bg-white rounded-full py-2 px-4 shadow-lg flex items-center gap-3">
-          <div className="flex -space-x-2">
-            {avatars.map((avatar, i) => (
-              <div key={i} className="w-8 h-8 rounded-full bg-gray-300 border-2 border-white overflow-hidden">
-                <img src={avatar} alt={`Resident ${i+1}`} className="w-full h-full object-cover" />
-              </div>
-            ))}
-          </div>
-          <div className="text-sm font-medium"><span className="text-teal-600">4.9</span> from 200+ families</div>
+        <div className="bg-white rounded-full py-3 px-5 shadow-lg text-sm font-medium text-teal-700">
+          Serving seniors since 2015
         </div>
       </div>
     </div>

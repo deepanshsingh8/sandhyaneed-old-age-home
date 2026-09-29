@@ -1,4 +1,6 @@
 import React from 'react';
+import InfoCard from '@/components/InfoCard';
+import { seniorLivingHighlights } from '@/lib/site';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ContactCTA from '@/components/ContactCTA';
@@ -49,81 +51,64 @@ const rooms = [
   { type: "Double Room", image: "/img/room/doublebed.webp", description: "Comfortable shared spaces for couples" }
 ];
 
-// Stats data
-const stats = [
-  { value: "24/7", label: "Care Staff", bgColor: "bg-sandhya-peach" },
-  { value: "100%", label: "Satisfaction", bgColor: "bg-sandhya-purple" },
-  { value: "15+", label: "Years Experience", bgColor: "bg-blue-50" },
-  { value: "50+", label: "Happy Residents", bgColor: "bg-green-50" }
-];
 
 // Reusable components with reduced lines
-const SectionTitle = ({ subtitle, title, description }) => (
-  <div className="text-center mb-16">
+const SectionTitle = ({ subtitle, title, description, as: Heading = "h2" }: { subtitle: string; title: string; description: string; as?: "h1" | "h2" }) => (
+  <div className="text-center mb-8 md:mb-16">
     {subtitle && <span className="inline-block px-4 py-1 bg-sandhya-purple bg-opacity-100 text-sandhya-black rounded-full text-sm font-medium mb-4">{subtitle}</span>}
-    <h2 className="font-playfair text-4xl font-semibold text-sandhya-black mb-4">{title}</h2>
+    <Heading className="font-playfair text-2xl sm:text-3xl md:text-4xl font-semibold text-sandhya-black mb-4">{title}</Heading>
     <div className="w-16 h-1 bg-sandhya-darkGray mx-auto mb-6"></div>
-    <p className="text-gray-600 max-w-3xl mx-auto text-lg">{description}</p>
+    <p className="text-gray-600 max-w-3xl mx-auto text-base sm:text-lg">{description}</p>
   </div>
 );
 
 const Facilities = () => (
   <div className="min-h-screen flex flex-col">
     <Navbar />
-    <main className="flex-grow">
+    <main id="main-content" tabIndex={-1} className="flex-grow outline-none">
       {/* Hero Section */}
-      <div className="bg-gradient-to-b from-white to-sandhya-blue py-20">
+      <div className="bg-gradient-to-b from-white to-sandhya-blue py-10 sm:py-14 md:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionTitle 
+          <SectionTitle
+            as="h1"
             subtitle="Our Services"
-            title="Our Facilities"
+            title="Senior Living Facilities near Jaipur"
             description="At Sandhyaneed, we offer a range of accommodation options and amenities designed for comfort, engagement, and peace of mind."
           />
         </div>
       </div>
-      
+
       {/* Facilities Overview */}
       <section className="bg-gradient-to-b from-sandhya-blue to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* <div className="text-center mb-16">
-            <p className="text-gray-600 max-w-3xl mx-auto text-lg">
-              We've thoughtfully designed our facilities to meet the diverse needs of our residents, ensuring a comfortable, secure, and enriching living environment.
-            </p>
-          </div> */}
-          
+
           {facilities.map((category, idx) => (
-            <div key={idx} className="mb-24 last:mb-0">
-              <h2 className="font-playfair text-3xl font-semibold text-sandhya-black mb-12 text-center">{category.category}</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div key={idx} className="mb-12 md:mb-24 last:mb-0">
+              <h2 className="font-playfair text-2xl sm:text-3xl font-semibold text-sandhya-black mb-6 md:mb-12 text-center">{category.category}</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
                 {category.items.map((facility, index) => (
-                  <div key={index} className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 group p-8">
-                    <div className={`${facility.color} inline-flex rounded-xl p-4 mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                      <facility.icon className="h-8 w-8" />
-                    </div>
-                    <h3 className="text-xl font-semibold mb-3 text-sandhya-black group-hover:text-black transition-colors duration-300">{facility.title}</h3>
-                    <p className="text-gray-600 leading-relaxed">{facility.description}</p>
-                  </div>
+                  <InfoCard key={index} icon={<facility.icon />} iconClassName={facility.color} title={facility.title} description={facility.description} />
                 ))}
               </div>
             </div>
           ))}
         </div>
       </section>
-      
+
       {/* Accommodation Gallery */}
-      <section className="py-24 bg-gradient-to-b from-white to-gray-50">
+      <section className="py-12 sm:py-16 md:py-24 bg-gradient-to-b from-white to-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionTitle 
+          <SectionTitle
             subtitle="Our Rooms"
             title="Our Accommodations"
             description="Explore our comfortable living spaces designed for relaxation and convenience."
           />
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
             {rooms.map((room, index) => (
               <div key={index} className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 group">
                 <div className="aspect-w-16 aspect-h-9">
-                  <img src={room.image} alt={`${room.type} at Sandhyaneed Old Age Home`} className="object-cover h-64 w-full" />
+                  <img loading="lazy" decoding="async" src={room.image} alt={`${room.type} at Sandhyaneed Old Age Home`} className="object-cover h-64 w-full" />
                 </div>
                 <div className="p-6">
                   <h3 className="text-xl font-semibold mb-2 text-sandhya-black group-hover:text-black transition-colors duration-300">{room.type}</h3>
@@ -132,36 +117,36 @@ const Facilities = () => (
               </div>
             ))}
           </div>
-          
+
           <div className="text-center mt-12">
-            <a href="/contact" className="inline-flex items-center justify-center px-6 py-3 bg-sandhya-darkGray text-white rounded-lg hover:bg-black transition-colors duration-300 group">
+            <a href="/contact" className="inline-flex items-center justify-center px-6 py-3 cta-button rounded-lg transition-colors duration-300 group">
               <span>Inquire About Accommodations</span>
               <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
             </a>
           </div>
         </div>
       </section>
-      
+
       {/* Stats Section */}
-      <section className="py-16 bg-white">
+      <section className="py-10 md:py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-white rounded-2xl p-8 md:p-12 shadow-lg">
-            <div className="grid md:grid-cols-2 gap-8 items-center">
+          <div className="bg-white rounded-2xl p-5 sm:p-6 md:p-12 shadow-lg">
+            <div className="grid md:grid-cols-2 gap-4 sm:gap-6 md:gap-8 items-center">
               <div>
                 <h3 className="text-2xl font-playfair font-semibold text-sandhya-black mb-4">Need Custom Accommodations?</h3>
                 <p className="text-gray-600 mb-6">
                   We understand that each resident has unique needs. Our team is ready to discuss personalized care plans and accommodation options to ensure your comfort and well-being.
                 </p>
-                <a href="#contact" className="inline-flex items-center text-sandhya-black hover:text-sandhya-purple font-medium transition-colors duration-300">
+                <a href="/contact" className="inline-flex items-center text-sandhya-black hover:text-sandhya-purple font-medium transition-colors duration-300">
                   Contact Us For Details
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </a>
               </div>
               <div className="grid grid-cols-2 gap-4">
-                {stats.map((stat, index) => (
-                  <div key={index} className={`${stat.bgColor} bg-opacity-100 p-4 rounded-lg flex items-center justify-center`}>
+                {seniorLivingHighlights.map((stat, index) => (
+                  <div key={index} className={`${stat.bg} bg-opacity-100 p-4 rounded-lg flex items-center justify-center`}>
                     <div className="text-center">
-                      <div className="text-4xl font-bold text-sandhya-black mb-2">{stat.value}</div>
+                      <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-sandhya-black mb-2">{stat.value}</div>
                       <div className="text-sm text-gray-600">{stat.label}</div>
                     </div>
                   </div>
@@ -171,7 +156,7 @@ const Facilities = () => (
           </div>
         </div>
       </section>
-      
+
       <ContactCTA />
     </main>
     <Footer />

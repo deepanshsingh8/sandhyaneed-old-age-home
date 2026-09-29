@@ -2,15 +2,19 @@ import React from 'react';
 
 const MissionSection = () => {
   return (
-    <section className="py-36 bg-sandhya-gray bg-opacity-90">
+    <section className="py-12 sm:py-20 md:py-36 bg-sandhya-gray bg-opacity-90">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row gap-10 items-center">
-          <div className="md:w-1/2">
+        <div className="flex flex-col md:flex-row gap-6 md:gap-10 items-center">
+          <div className="w-full min-w-0 md:w-1/2">
             <div className="relative">
-              <div className="aspect-w-4 aspect-h-3 rounded-lg overflow-hidden">
-                <img 
+              <div className="aspect-[4/3] rounded-lg overflow-hidden">
+                <img
                   src="/img/homepage/inauguration.webp"
-                  alt="Inauguration of Sandhyaneed - Best Old Age Home in Rajasthan"
+                  alt="Inauguration of Sandhyaneed Old Age Home in Dhodsar near Jaipur"
+                  loading="lazy"
+                  decoding="async"
+                  width={1920}
+                  height={1282}
                   className="object-cover h-full w-full rounded-lg shadow-md"
                 />
               </div>
@@ -21,19 +25,19 @@ const MissionSection = () => {
               </div>
             </div>
           </div>
-          
-          <div className="md:w-1/2">
-            <h2 className="font-playfair text-3xl font-semibold text-sandhya-black mb-6">
+
+          <div className="w-full min-w-0 md:w-1/2">
+            <h2 className="font-playfair text-2xl sm:text-3xl font-semibold text-sandhya-black mb-6">
               Our Mission
             </h2>
             <p className="text-gray-700 mb-4">
-              Sandhyaneed is recognized as the <strong>best old age home in Rajasthan</strong>, offering trusted elderly care in the heart of Jaipur. Founded in 2015 by Dr. N.C. Lunayach, our mission is to provide a nurturing and affordable space where senior citizens receive love, respect, and quality care.
+              Sandhyaneed is an <strong>old age home near Jaipur</strong> in Dhodsar Village on the Jaipur-Sikar Highway. Founded in 2015 by Dr. N.C. Lunayach, our mission is to provide a nurturing and affordable space where senior citizens receive love, respect, and quality care.
             </p>
             <p className="text-gray-700 mb-4">
-              As a <strong>trusted old age home in Jaipur</strong>, Sandhyaneed was inaugurated by Mr. Sumedha Nand Saraswati (MP, Sikar) and Shri Ratan Jaldhari (MLA, Sikar) to symbolize compassion, dignity, and social responsibility for elderly care across Rajasthan.
+              Sandhyaneed was inaugurated by Mr. Sumedha Nand Saraswati (MP, Sikar) and Shri Ratan Jaldhari (MLA, Sikar) to symbolize compassion, dignity, and social responsibility for elderly care across Rajasthan.
             </p>
             <p className="text-gray-700">
-              We provide <strong>modern senior living amenities</strong> including a large library, spacious dining area, and a peaceful garden for evening strolls—making Sandhyaneed a top choice for those seeking <strong>affordable senior care in Jaipur</strong>.
+              We provide <strong>senior living amenities</strong> including a large library, spacious dining area, and a peaceful garden for evening strolls. Families seeking senior care near Jaipur are welcome to visit and discuss their needs with our team.
             </p>
           </div>
         </div>

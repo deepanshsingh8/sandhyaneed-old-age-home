@@ -1,4 +1,165 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+[build.processing.html]
+  pretty_urls = false
+
+[[redirects]]
+  from = "/index.html"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/about.html"
+  to = "/about"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/facilities.html"
+  to = "/facilities"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/activities.html"
+  to = "/activities"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/health-security.html"
+  to = "/health-security"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/rules.html"
+  to = "/rules"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/gallery.html"
+  to = "/gallery"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/contact.html"
+  to = "/contact"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/privacy.html"
+  to = "/privacy"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/terms.html"
+  to = "/terms"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/legal.html"
+  to = "/legal"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/accessibility.html"
+  to = "/accessibility"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/cookies"
+  to = "/privacy#cookies"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/disclaimer"
+  to = "/terms#website-content"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/copyright"
+  to = "/terms#copyright"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/refund-cancellation"
+  to = "/legal#cancellations-refunds"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/about"
+  to = "/about.html"
+  status = 200
+
+[[redirects]]
+  from = "/facilities"
+  to = "/facilities.html"
+  status = 200
+
+[[redirects]]
+  from = "/activities"
+  to = "/activities.html"
+  status = 200
+
+[[redirects]]
+  from = "/health-security"
+  to = "/health-security.html"
+  status = 200
+
+[[redirects]]
+  from = "/rules"
+  to = "/rules.html"
+  status = 200
+
+[[redirects]]
+  from = "/gallery"
+  to = "/gallery.html"
+  status = 200
+
+[[redirects]]
+  from = "/contact"
+  to = "/contact.html"
+  status = 200
+
+[[redirects]]
+  from = "/privacy"
+  to = "/privacy.html"
+  status = 200
+
+[[redirects]]
+  from = "/terms"
+  to = "/terms.html"
+  status = 200
+
+[[redirects]]
+  from = "/legal"
+  to = "/legal.html"
+  status = 200
+
+[[redirects]]
+  from = "/accessibility"
+  to = "/accessibility.html"
+  status = 200
+
 [[redirects]]
   from = "/*"
-  to = "/index.html"
-  status = 200
+  to = "/404.html"
+  status = 404

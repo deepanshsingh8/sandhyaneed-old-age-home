@@ -98,4 +98,23 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  #main-content {
+    scroll-margin-top: 5rem;
+  }
+}
+
+@layer components {
+  .cta-button {
+    @apply bg-teal-700 text-white transition-all duration-200 hover:bg-teal-800 hover:text-white hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700 focus-visible:ring-offset-2;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
