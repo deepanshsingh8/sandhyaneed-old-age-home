@@ -10,6 +10,7 @@ lerna-debug.log*
 node_modules
 dist
 dist-ssr
+*.tsbuildinfo
 *.local
 
 # Editor directories and files
@@ -23,5 +24,6 @@ dist-ssr
 *.sln
 *.sw?
 
-# Full-resolution photo originals (not deployed)
+# Local deployment state and original photographs
+.vercel/
 photo-originals/

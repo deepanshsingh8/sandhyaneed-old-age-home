@@ -8,17 +8,19 @@ import MissionSection from '@/components/MissionSection';
 import TestimonialSection from '@/components/TestimonialSection';
 import GalleryPreview from '@/components/GalleryPreview';
 import ContactCTA from '@/components/ContactCTA';
+import HomeFAQ from '@/components/HomeFAQ';
 
 const Index = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
-      <main className="flex-grow">
+      <main id="main-content" tabIndex={-1} className="flex-grow outline-none">
         <Hero />
         <MissionSection />
         <FeaturedFacilities />
         <TestimonialSection />
         <GalleryPreview />
+        <HomeFAQ />
         <ContactCTA />
       </main>
       <Footer />

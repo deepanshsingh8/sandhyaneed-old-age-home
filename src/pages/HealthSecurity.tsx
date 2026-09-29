@@ -1,4 +1,5 @@
 import React from 'react';
+import InfoCard from '@/components/InfoCard';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ContactCTA from '@/components/ContactCTA';
@@ -13,8 +14,8 @@ const healthServices = [
   },
   {
     icon: Stethoscope, color: "bg-green-50 text-green-600", title: "Medical Staff",
-    description: "Our trained medical professionals provide round-the-clock care and attention to all residents, ensuring that medical needs are promptly addressed.",
-    bulletPoints: ["24/7 nursing staff", "Regular physician visits", "Specialist consultations as needed"]
+    description: "Discuss your family member’s care needs with management and confirm the staffing, clinical support and services currently available before arranging admission.",
+    bulletPoints: ["Confirm nursing support and hours", "Ask about physician visits", "Discuss specialist referrals and individual needs"]
   },
   {
     icon: Ambulance, color: "bg-amber-50 text-amber-600", title: "Emergency Services",
@@ -62,67 +63,63 @@ const safetyFeatures = [
 ];
 
 // Reusable components (refactored to be more concise)
-const SectionTitle = ({ subtitle, title, description }) => (
-  <div className="text-center mb-16">
+const SectionTitle = ({ subtitle, title, description, as: Heading = "h2" }: { subtitle: string; title: string; description: string; as?: "h1" | "h2" }) => (
+  <div className="text-center mb-8 md:mb-16">
     {subtitle && <span className="inline-block px-4 py-1 bg-sandhya-purple bg-opacity-100 text-sandhya-black rounded-full text-sm font-medium mb-4">{subtitle}</span>}
-    <h2 className="font-playfair text-3xl lg:text-4xl font-semibold text-sandhya-black mb-4">{title}</h2>
+    <Heading className="font-playfair text-2xl sm:text-3xl lg:text-4xl font-semibold text-sandhya-black mb-4">{title}</Heading>
     <div className="w-16 h-1 bg-sandhya-darkGray mx-auto mb-6"></div>
-    <p className="text-gray-600 max-w-3xl mx-auto text-lg">{description}</p>
+    <p className="text-gray-600 max-w-3xl mx-auto text-base sm:text-lg">{description}</p>
   </div>
 );
 
 const ServiceCard = ({ service }) => (
-  <div className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 group p-8">
-    <div className={`${service.color} inline-flex rounded-xl p-4 mb-6 group-hover:scale-110 transition-transform duration-300`}>
-      <service.icon className="h-8 w-8" />
-    </div>
-    <h3 className="text-xl font-semibold mb-3 text-sandhya-black group-hover:text-black transition-colors duration-300">{service.title}</h3>
-    <p className="text-gray-600 leading-relaxed mb-4">{service.description}</p>
+  <InfoCard icon={<service.icon />} iconClassName={service.color} title={service.title} description={service.description}>
     <ul className="space-y-2">
       {service.bulletPoints.map((point, i) => (
-        <li key={i} className="flex items-start text-gray-600"><span className="text-gray-800 mr-2">•</span><span>{point}</span></li>
+        <li key={i} className="flex items-start text-gray-600"><span className="mr-2 text-gray-800">•</span><span>{point}</span></li>
       ))}
     </ul>
-  </div>
+  </InfoCard>
 );
 
 const HealthSecurity = () => (
   <div className="min-h-screen flex flex-col">
     <Navbar />
-    <main className="flex-grow">
+    <main id="main-content" tabIndex={-1} className="flex-grow outline-none">
       {/* Hero Section */}
-      <div className="bg-gradient-to-b from-white to-sandhya-blue py-20">
+      <div className="bg-gradient-to-b from-white to-sandhya-blue py-10 sm:py-14 md:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionTitle 
+          <SectionTitle
+            as="h1"
             subtitle="Our Services"
             title="Health & Security"
             description="At Sandhyaneed, the health, safety, and security of our residents are our top priorities. Learn about our comprehensive health services and security measures."
           />
         </div>
       </div>
-      
+
       {/* Health Services Section */}
       <section className="bg-gradient-to-b from-sandhya-blue to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="font-playfair text-3xl font-semibold text-sandhya-black mb-3">Healthcare Services</h2>
+          <div className="text-center mb-8 md:mb-16">
+            <h2 className="font-playfair text-2xl sm:text-3xl font-semibold text-sandhya-black mb-3">Healthcare Services</h2>
             <div className="w-16 h-1 bg-sandhya-darkGray mx-auto mb-6"></div>
-            <p className="text-gray-600 max-w-3xl mx-auto text-lg">We provide comprehensive healthcare services to ensure the well-being of our residents at all times.</p>
+            <p className="text-gray-600 max-w-3xl mx-auto text-base sm:text-lg">We provide comprehensive healthcare services to ensure the well-being of our residents at all times.</p>
           </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 mb-8 md:mb-16">
             {healthServices.map((service, idx) => <ServiceCard key={idx} service={service} />)}
           </div>
-          
+
           {/* Additional Health Services */}
-          <div className="bg-white rounded-2xl p-8 md:p-12 shadow-lg mb-16">
+          <div className="bg-white rounded-2xl p-5 sm:p-6 md:p-12 shadow-lg mb-8 md:mb-16">
             <h3 className="font-playfair text-2xl font-semibold text-sandhya-black mb-6">Additional Health Services</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {additionalHealthServices.map((service, idx) => (
                 <div key={idx} className="flex items-start p-4 bg-gray-50 rounded-lg">
-                  <span className="text-gray-800 mr-3 text-lg">•</span>
+                  <span className="text-gray-800 mr-3 text-base sm:text-lg">•</span>
                   <div>
-                    <h4 className="text-lg font-medium mb-2">{service.title}</h4>
+                    <h4 className="text-base sm:text-lg font-medium mb-2">{service.title}</h4>
                     <p className="text-gray-600">{service.description}</p>
                   </div>
                 </div>
@@ -131,43 +128,43 @@ const HealthSecurity = () => (
           </div>
         </div>
       </section>
-      
+
       {/* Security Measures Section */}
-      <section className="py-24 bg-gradient-to-b from-white to-gray-50">
+      <section className="py-12 sm:py-16 md:py-24 bg-gradient-to-b from-white to-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionTitle 
+          <SectionTitle
             subtitle="Your Safety"
             title="Security Measures"
             description="We implement comprehensive security protocols to ensure a safe and protected environment for all residents."
           />
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 mb-8 md:mb-16">
             <div>
               <div className="flex items-center gap-4 mb-6">
                 <div className="bg-purple-50 text-purple-600 inline-flex rounded-xl p-4"><Cctv className="h-8 w-8" /></div>
                 <h2 className="font-playfair text-2xl font-semibold text-sandhya-black">Surveillance Systems</h2>
               </div>
               <p className="text-gray-700 mb-6">
-                Our facility is equipped with state-of-the-art CCTV cameras strategically placed throughout 
+                Our facility is equipped with state-of-the-art CCTV cameras strategically placed throughout
                 the premises for continuous monitoring and resident safety.
               </p>
               <ul className="space-y-4 black">
                 {cctvFeatures.map((item, idx) => (
-                  <li key={idx} className="flex items-start"><span className="text-gray-800 mr-3 text-lg">•</span><span className="text-gray-600">{item}</span></li>
+                  <li key={idx} className="flex items-start"><span className="text-gray-800 mr-3 text-base sm:text-lg">•</span><span className="text-gray-600">{item}</span></li>
                 ))}
               </ul>
             </div>
             <div className="rounded-xl overflow-hidden shadow-lg">
-              <img src="/img/faci/cctv.webp" alt="Security monitoring center" className="object-cover h-full w-full" />
+              <img loading="lazy" decoding="async" src="/img/faci/cctv.webp" alt="Security monitoring center" className="object-cover h-full w-full" />
             </div>
           </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 mb-8 md:mb-16">
             {securityMeasures.map((measure, idx) => <ServiceCard key={idx} service={measure} />)}
           </div>
-          
+
           {/* Safety Features */}
-          <div className="bg-white rounded-2xl p-8 md:p-12 shadow-lg mb-16">
+          <div className="bg-white rounded-2xl p-5 sm:p-6 md:p-12 shadow-lg mb-8 md:mb-16">
             <h3 className="font-playfair text-2xl font-semibold text-sandhya-black mb-8 text-center">Additional Safety Features</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {safetyFeatures.map((feature, idx) => (
@@ -177,9 +174,9 @@ const HealthSecurity = () => (
                 </div>
               ))}
             </div>
-            
+
             <div className="text-center mt-10">
-              <a href="/contact" className="inline-flex items-center justify-center px-6 py-3 bg-sandhya-darkGray text-white rounded-lg hover:bg-black transition-colors duration-300 group">
+              <a href="/contact" className="inline-flex items-center justify-center px-6 py-3 cta-button rounded-lg transition-colors duration-300 group">
                 <span>Learn More About Our Safety Features</span>
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
               </a>
@@ -187,7 +184,7 @@ const HealthSecurity = () => (
           </div>
         </div>
       </section>
-      
+
       <ContactCTA />
     </main>
     <Footer />

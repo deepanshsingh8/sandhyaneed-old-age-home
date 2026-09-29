@@ -1,4 +1,5 @@
 import React from 'react';
+import { site } from '@/lib/site';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ContactCTA from '@/components/ContactCTA';
@@ -15,7 +16,7 @@ const Rules = () => {
       ]},
       {icon: "Wallet", title: "Fees & Payment", color: "green", items: [
         {subtitle: "Fee Structure", content: "Fees vary based on the type of accommodation (flats, suites, double rooms, or four-seated rooms) and the level of care required."},
-        {subtitle: "Payment Schedule", content: "Fees are payable monthly, quarterly, or annually, as per the agreement. A security deposit equivalent to one month's fee is required at the time of admission."},
+        {subtitle: "Payment Schedule & Deposit", content: "Payment schedules and security deposits are set out in the applicable admission agreement. Confirm the current amounts, payment instructions and refund conditions with management before making a payment."},
         {subtitle: "Late Payment", content: "A late fee will be applied for payments received after the due date. Consistent late payments may result in a review of residency."}
       ]},
       {icon: "Home", title: "Accommodation Rules", color: "amber", items: [
@@ -28,7 +29,7 @@ const Rules = () => {
         {subtitle: "Special Dietary Requirements", content: "Special dietary needs due to medical conditions must be communicated to the management, and we will make reasonable accommodations."}
       ]},
       {icon: "Clock", title: "Visiting Hours & Guest Policies", color: "blue", items: [
-        {subtitle: "Visiting Hours", content: "Visitors are welcome between 10:00 AM and 7:00 PM daily. Exceptions may be made in case of emergencies."},
+        {subtitle: "Visiting Hours", content: `Visitors are welcome ${site.visitingHours.toLowerCase()}. Exceptions may be made in case of emergencies.`},
         {subtitle: "Guest Registration", content: "All visitors must sign in at the reception and obtain a visitor's pass."},
         {subtitle: "Overnight Guests", content: "Overnight stays by guests require prior permission from management and may incur additional charges."}
       ]},
@@ -58,11 +59,11 @@ const Rules = () => {
         </div>
         <h2 className="font-playfair text-2xl font-semibold text-sandhya-black">{section.title}</h2>
       </div>
-      <div className="bg-white rounded-xl overflow-hidden shadow-md p-8">
+      <div className="bg-white rounded-xl overflow-hidden shadow-md p-5 sm:p-6 md:p-8">
         <div className="space-y-4">
           {section.items.map((item, idx) => (
             <div key={idx}>
-              <h3 className="text-lg font-medium mb-2">{item.subtitle}</h3>
+              <h3 className="text-base sm:text-lg font-medium mb-2">{item.subtitle}</h3>
               <p className="text-gray-700">{item.content}</p>
               {item.list && (
                 <ul className="space-y-2 mt-2">
@@ -81,18 +82,18 @@ const Rules = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
-      <main className="flex-grow">
+      <main id="main-content" tabIndex={-1} className="flex-grow outline-none">
         {/* Hero Section */}
-        <div className="bg-gradient-to-b from-white to-sandhya-blue py-20">
+        <div className="bg-gradient-to-b from-white to-sandhya-blue py-10 sm:py-14 md:py-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <span className="inline-block px-4 py-1 bg-sandhya-purple bg-opacity-100 text-sandhya-black rounded-full text-sm font-medium mb-4">
               Our Policies
             </span>
-            <h1 className="font-playfair text-4xl md:text-5xl font-bold text-sandhya-black mb-4">
+            <h1 className="font-playfair text-3xl sm:text-4xl md:text-5xl font-bold text-sandhya-black mb-4">
               Rules & Regulations
             </h1>
             <div className="w-16 h-1 bg-sandhya-darkGray mx-auto mb-6"></div>
-            <p className="text-lg text-gray-700 max-w-3xl mx-auto">
+            <p className="text-base sm:text-lg text-gray-700 max-w-3xl mx-auto">
               Our guidelines are designed to ensure the comfort, safety, and
               well-being of all residents in our community.
             </p>
@@ -102,7 +103,7 @@ const Rules = () => {
         {/* Introduction */}
         <section className="bg-gradient-to-b from-sandhya-blue to-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="bg-white p-8 rounded-xl shadow-md">
+            <div className="bg-white p-5 sm:p-6 md:p-8 rounded-xl shadow-md">
               <h2 className="text-2xl font-semibold text-sandhya-black mb-4">
                 Important Notice
               </h2>
@@ -119,10 +120,10 @@ const Rules = () => {
         {/* Download Buttons Section */}
         <section className="py-10 bg-gradient-to-br from-sandhya-purple/10 to-white">
           <div className="max-w-6xl mx-auto px-6 text-center">
-            <h2 className="text-4xl font-extrabold text-sandhya-black mb-8">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-sandhya-black mb-8">
               Download Essential Documents
             </h2>
-            <div className="grid sm:grid-cols-2 gap-10 max-w-2xl mx-auto">
+            <div className="grid sm:grid-cols-2 gap-6 md:gap-10 max-w-2xl mx-auto">
               {[
                 {
                   label: "Rules & Regulations",
@@ -140,12 +141,12 @@ const Rules = () => {
                   key={i}
                   href={href}
                   download
-                  className="group block px-7 py-4 bg-sandhya-darkGray text-white rounded-xl shadow-md hover:shadow-lg hover:bg-black transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sandhya-purple transform hover:scale-[1.02]"
+                  className="group block px-5 py-3 sm:px-7 sm:py-4 cta-button rounded-xl shadow-md hover:shadow-lg transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sandhya-purple transform hover:scale-[1.02]"
                 >
                   <div className="flex items-center justify-center space-x-3">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className="h-6 w-6 group-hover:translate-x-0.5 transition-transform"
+                      className="h-5 w-5 sm:h-6 sm:w-6 shrink-0 group-hover:translate-x-0.5 transition-transform"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -157,7 +158,7 @@ const Rules = () => {
                         d={iconPath}
                       />
                     </svg>
-                    <span className="text-lg font-semibold">{label}</span>
+                    <span className="text-base sm:text-lg font-semibold">{label}</span>
                   </div>
                 </a>
               ))}
@@ -166,15 +167,15 @@ const Rules = () => {
         </section>
 
         {/* Rules Sections */}
-        <section className="py-24 bg-white">
+        <section className="py-12 sm:py-16 md:py-24 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="space-y-16">
+            <div className="space-y-8 md:space-y-16">
               {data.sections.map((section, i) => (
                 <RuleSection key={i} section={section} />
               ))}
 
               {/* Additional Safety Features */}
-              <div className="bg-white rounded-2xl p-8 md:p-12 shadow-lg">
+              <div className="bg-white rounded-2xl p-5 sm:p-6 md:p-12 shadow-lg">
                 <h3 className="font-playfair text-2xl font-semibold text-sandhya-black mb-8 text-center">
                   Safety & Security Features
                 </h3>
@@ -194,7 +195,7 @@ const Rules = () => {
               </div>
 
               {/* Amendment Notice */}
-              <div className="bg-gradient-to-r from-sandhya-blue to-sandhya-purple bg-opacity-30 p-8 rounded-xl shadow-md">
+              <div className="bg-gradient-to-r from-sandhya-blue to-sandhya-purple bg-opacity-30 p-5 sm:p-6 md:p-8 rounded-xl shadow-md">
                 <div className="flex items-center gap-4 mb-4">
                   <Shield className="h-8 w-8 text-sandhya-black" />
                   <h3 className="text-xl font-semibold text-sandhya-black">
@@ -210,7 +211,7 @@ const Rules = () => {
                 <div className="text-center mt-6">
                   <a
                     href="/contact"
-                    className="inline-flex items-center justify-center px-6 py-3 bg-sandhya-darkGray text-white rounded-lg hover:bg-black transition-colors duration-300 group"
+                    className="inline-flex items-center justify-center px-6 py-3 cta-button rounded-lg transition-colors duration-300 group"
                   >
                     <span>Contact Us For More Information</span>
                     <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
