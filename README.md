@@ -154,15 +154,3 @@ Google’s [AI search guidance](https://developers.google.com/search/docs/appear
 
 ---
 
-## 🧠 Credits
-
-Developed with care by [**Flux8 Labs**](https://flux8labs.com) 💡
-Building purposeful technology for people, brands, and communities.
-
----
-
-## Keeping the Desktop copies in sync
-
-The Deepansh repository (`deepanshsingh8/sandhyaneed-old-age-home`) is the deployment source for the existing Vercel project. Both Desktop folders contain the same application source, deployment configuration and 37 gallery photos. Their Git histories and remotes stay separate. Make future changes in `sandhyaneed-old-age-home-1` and synchronize source files to the other folder without copying `.git`, dependencies, build output or local credentials.
-
-The footer retains both the NK Shikshan Sankul CSR attribution and Flux8labs developer credit. Gallery controls support keyboard activation, contain focus while the photo viewer is open and restore focus on close. The hero location and phone controls are native links; the slideshow has a pause control and does not autoplay with reduced motion enabled.
