@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import { readFile, access } from "node:fs/promises";
+import sharp from "sharp";
 import { resolve } from "node:path";
 
 const sitemap = await readFile("dist/sitemap.xml", "utf8");
@@ -32,6 +33,12 @@ for (const pathname of paths) {
   assert.match(html, /rel="icon" type="image\/x-icon" href="\/favicon.ico\?v=2" sizes="32x32"/, "Existing favicon must be linked");
   for (const path of legalPaths) assert.ok(html.includes(`href="${path}"`), `Footer policy link: ${path}`);
   assert.match(html, /id="main-content"/, `Skip-link target: ${url}`);
+  assert.ok(!html.includes("fonts.googleapis.com") && !html.includes("fonts.gstatic.com"), `No third-party font requests: ${url}`);
+  assert.match(html, /<link rel="preload" href="\/assets\/playfair-display-latin-wght-normal-[^"]+\.woff2" as="font" type="font\/woff2" crossorigin/, `Heading font preloaded: ${url}`);
+  if (pathname !== "/") {
+    const crumbs = html.match(/<nav aria-label="breadcrumb"[\s\S]*?<\/nav>/)?.[0];
+    assert.ok(crumbs?.includes('href="/"') && crumbs.includes('aria-current="page"'), `Visible breadcrumbs: ${url}`);
+  }
   assert.ok(html.includes('NK Shikshan Sankul') && html.includes('href="https://flux8labs.com"'), `Both footer credits: ${url}`);
   assert.ok(html.includes('9:00 AM - 5:00 PM') && html.includes('10:00 AM - 7:00 PM'), `Office and visiting hours: ${url}`);
   if (!isLegal) {
@@ -42,13 +49,19 @@ for (const pathname of paths) {
     assert.ok(html.includes(business.email), "Business email must be visible in the page");
     assert.equal(business.address.addressLocality, "Dhodsar");
     assert.ok(!business.aggregateRating, "Do not add unsupported rating markup");
+    assert.equal(business.founder?.name, "Dr. N. C. Lunayach", "Founder in structured data");
     if (pathname === "/") {
+      assert.match(html, /<img[^>]*src="\/img\/homepage\/hero1.webp"[^>]*fetchpriority="high"/, "Hero LCP image is high priority");
+      const heroIntro = html.slice(html.indexOf("<h1"), html.indexOf("Office Hours"));
+      for (const path of ["/about", "/contact"]) assert.ok(heroIntro.includes(`href="${path}"`), `Hero call-to-action is a crawlable link: ${path}`);
       const faq = schema["@graph"].find(item => item["@type"] === "FAQPage");
       assert.equal(faq.mainEntity.length, 5);
       for (const question of faq.mainEntity) {
         assert.ok(html.includes(question.name), `Visible FAQ: ${question.name}`);
       }
-      assert.match(html, /src="\/img\/homepage\/community-greeting.webp"/);
+      // Later hero slides mount after hydration so they don't compete with the LCP image.
+      const bundle = html.match(/<script type="module"[^>]*src="([^"]+)"/)[1];
+      assert.ok((await readFile(resolve("dist", bundle.slice(1)), "utf8")).includes("/img/homepage/community-greeting.webp"), "Resident photo remains in the hero slideshow");
       assert.match(html, /src="\/img\/homepage\/inauguration.webp"/);
     } else {
       const breadcrumbs = schema["@graph"].find(item => item["@type"] === "BreadcrumbList");
@@ -70,7 +83,19 @@ for (const pathname of paths) {
     }
   }
   if (pathname === "/about") assert.ok(!html.includes("<iframe"), "Videos must not load in initial HTML");
+  for (const [tag] of html.matchAll(/<img[^>]*>/g)) {
+    assert.match(tag, / alt="[^"]+"/, `Image needs alt text: ${tag}`);
+    assert.match(tag, / width="\d+"/, `Image needs width/height to avoid layout shift: ${tag}`);
+    assert.match(tag, / height="\d+"/, `Image needs width/height to avoid layout shift: ${tag}`);
+    for (const [, candidate] of tag.matchAll(/(?:srcSet|srcset)="([^"]+)"/g)) {
+      for (const entry of candidate.split(", ")) await access(resolve("dist", entry.split(" ")[0].slice(1)));
+    }
+  }
   for (const [, src] of html.matchAll(/<img[^>]*src="([^"]+)"/g)) {
+    if (!src.startsWith("https://")) {
+      const { format } = await sharp(resolve("dist", src.slice(1))).metadata();
+      assert.equal(format, "webp", `Images must be WebP: ${src}`);
+    }
     if (src.startsWith("https://")) {
       assert.doesNotThrow(() => new URL(src), `Valid external image URL: ${src}`);
       continue;
@@ -114,4 +139,4 @@ assert.equal(favicon.readUInt16LE(2), 1, "Valid ICO format");
 assert.equal(favicon.readUInt16LE(4), 1, "One favicon image");
 assert.equal(favicon[6], 32, "Favicon width");
 assert.equal(favicon[7], 32, "Favicon height");
-console.log("SEO checks passed: 12 static pages, four noindex notices, eight sitemap entries, unique metadata, canonical URLs, structured data, visible FAQs, assets, policy links, privacy acknowledgement, gated embeds, redirects and 404 handling.");
+console.log("SEO checks passed: 12 static pages, four noindex notices, WebP images with alt text, dimensions and srcset, self-hosted fonts, visible breadcrumbs, eight sitemap entries, unique metadata, canonical URLs, structured data, visible FAQs, assets, policy links, privacy acknowledgement, gated embeds, redirects and 404 handling.");

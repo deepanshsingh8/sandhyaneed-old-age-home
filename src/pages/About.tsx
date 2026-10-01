@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import ContactCTA from "@/components/ContactCTA";
 import ClickToLoadEmbed from "@/components/ClickToLoadEmbed";
 import { Users, Target, Award, BookOpen, Heart, ArrowRight } from "lucide-react";
+import Img from "@/components/Img";
 
 const About = () => {
   // Data objects
@@ -223,7 +224,7 @@ const About = () => {
             {data.trustees.map((trustee, index) => (
               <div key={index} className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 group p-3 sm:p-6 text-center">
                 <div className="w-full max-w-48 aspect-square rounded-xl overflow-hidden shadow-lg mb-3 sm:mb-4 mx-auto">
-                  <img loading="lazy" decoding="async" src={trustee.image} alt={trustee.name} className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
+                  <Img src={trustee.image} alt={trustee.name} className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
                 </div>
                 <h3 className="text-sm leading-snug sm:text-xl font-bold text-sandhya-black mb-1 group-hover:text-black transition-colors duration-300">{trustee.name}</h3>
                 <p className="text-gray-600 uppercase tracking-wider text-xs sm:text-sm">{trustee.position}</p>

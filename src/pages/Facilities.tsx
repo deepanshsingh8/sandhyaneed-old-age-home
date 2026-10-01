@@ -5,6 +5,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ContactCTA from '@/components/ContactCTA';
 import { DoorOpen, Dice4, BriefcaseConveyorBelt, BedDouble, Utensils, Church, Sofa, AirVent, Gamepad, Music, Tv, LibraryBig, Dumbbell, Phone, ArrowRight } from 'lucide-react';
+import Img from "@/components/Img";
 
 // Consolidated facility data
 const facilities = [
@@ -108,7 +109,7 @@ const Facilities = () => (
             {rooms.map((room, index) => (
               <div key={index} className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 group">
                 <div className="aspect-w-16 aspect-h-9">
-                  <img loading="lazy" decoding="async" src={room.image} alt={`${room.type} at Sandhyaneed Old Age Home`} className="object-cover h-64 w-full" />
+                  <Img src={room.image} alt={`${room.type} at Sandhyaneed Old Age Home`} sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw" className="object-cover h-64 w-full" />
                 </div>
                 <div className="p-6">
                   <h3 className="text-xl font-semibold mb-2 text-sandhya-black group-hover:text-black transition-colors duration-300">{room.type}</h3>

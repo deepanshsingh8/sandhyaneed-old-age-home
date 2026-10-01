@@ -12,9 +12,11 @@
     "build:dev": "vite build --mode development && node scripts/prerender.mjs",
     "lint": "eslint .",
     "check:seo": "node scripts/check-seo.mjs",
+    "images": "node scripts/optimize-images.mjs",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fontsource-variable/playfair-display": "^5.3.0",
     "@hookform/resolvers": "^3.9.0",
     "@radix-ui/react-accordion": "^1.2.0",
     "@radix-ui/react-alert-dialog": "^1.1.1",
@@ -49,7 +51,6 @@
     "cmdk": "^1.0.0",
     "date-fns": "^3.6.0",
     "embla-carousel-react": "^8.3.0",
-    "framer-motion": "^12.10.5",
     "input-otp": "^1.2.4",
     "lucide-react": "^0.462.0",
     "next-themes": "^0.3.0",
@@ -80,6 +81,7 @@
     "eslint-plugin-react-refresh": "^0.4.9",
     "globals": "^15.9.0",
     "postcss": "^8.4.47",
+    "sharp": "^0.35.5",
     "tailwindcss": "^3.4.11",
     "typescript": "^5.5.3",
     "typescript-eslint": "^8.71.0",

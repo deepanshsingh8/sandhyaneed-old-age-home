@@ -1,4 +1,5 @@
 import React from 'react';
+import Img from "@/components/Img";
 
 const MissionSection = () => {
   return (
@@ -8,13 +9,10 @@ const MissionSection = () => {
           <div className="w-full min-w-0 md:w-1/2">
             <div className="relative">
               <div className="aspect-[4/3] rounded-lg overflow-hidden">
-                <img
+                <Img
                   src="/img/homepage/inauguration.webp"
                   alt="Inauguration of Sandhyaneed Old Age Home in Dhodsar near Jaipur"
-                  loading="lazy"
-                  decoding="async"
-                  width={1920}
-                  height={1282}
+                  sizes="(min-width: 768px) 50vw, 100vw"
                   className="object-cover h-full w-full rounded-lg shadow-md"
                 />
               </div>

@@ -112,7 +112,7 @@ export default {
                 'fade-in': 'fade-in 0.5s ease-out'
 			},
             fontFamily: {
-                'playfair': ['"Playfair Display"', 'serif'],
+                'playfair': ['"Playfair Display Variable"', 'serif'],
             }
 		}
 	},

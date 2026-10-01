@@ -87,6 +87,15 @@ export function getStructuredData(path: string) {
       telephone: "+919680147319",
       email: site.email,
       foundingDate: "2015",
+      founder: {
+        "@type": "Person",
+        "@id": `${site.url}/about#founder`,
+        name: "Dr. N. C. Lunayach",
+        jobTitle: "Founder and Trustee",
+        image: `${site.url}/img/about/1-500x500.webp`,
+        url: `${site.url}/about`,
+      },
+      parentOrganization: { "@type": "Organization", name: site.operator },
       address: {
         "@type": "PostalAddress",
         streetAddress: site.streetAddress,

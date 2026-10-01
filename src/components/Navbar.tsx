@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
-import logoImage from '/img/logo.webp';
+import Img from "@/components/Img";
+import PageBreadcrumbs from "@/components/PageBreadcrumbs";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,11 +21,12 @@ const Navbar = () => {
   const isActive = (path: string) => path === '/' ? location.pathname === '/' : location.pathname.startsWith(path);
 
   return (
+    <>
     <nav className="bg-white shadow-md w-full z-50 sticky top-0">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 md:h-20">
           <Link to="/" className="flex items-center">
-            <img src={logoImage} alt="Sandhya Need Senior Care Home" className="h-9 sm:h-11 md:h-12 w-auto object-contain" />
+            <Img src="/img/logo.webp" alt="Sandhyaneed Old Age Home" loading="eager" className="h-9 sm:h-11 md:h-12 w-auto object-contain" />
           </Link>
 
           {/* Desktop Navigation */}
@@ -72,6 +74,8 @@ const Navbar = () => {
         </div>
       )}
     </nav>
+    <PageBreadcrumbs />
+    </>
   );
 };
 

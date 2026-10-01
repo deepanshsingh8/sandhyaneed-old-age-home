@@ -10,7 +10,7 @@ type LegalDocument = {
   sections: PolicySection[];
 };
 
-export const legalUpdated = { date: '2026-09-29', label: '29 September 2026' };
+export const legalUpdated = { date: '2026-10-01', label: '1 October 2026' };
 
 export const legalPages: Record<LegalPath, LegalDocument> = {
   '/privacy': {
@@ -64,7 +64,7 @@ export const legalPages: Record<LegalPath, LegalDocument> = {
         id: 'third-parties', title: 'Maps, videos, fonts and images',
         paragraphs: [
           'Google Maps, YouTube and Vimeo embeds load only after you press their load or play button. That action connects your browser to the named provider and shares technical information, including your IP address and browser details. External links also take you to the provider’s own service.',
-          'Google Fonts supplies a website font. Your browser requests this resource when a page loads, even if you do not load a map or video. Google can receive technical request information. The site’s photographs are served with the website.',
+          'The website font and photographs are served from this website itself, so loading a page does not contact Google or another third party unless you choose to load a map or video.',
         ],
         links: [
           { label: 'Google privacy policy', href: 'https://policies.google.com/privacy' },

@@ -4,6 +4,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ContactCTA from '@/components/ContactCTA';
 import { HeartPulse, Stethoscope, Ambulance, Shield, Cctv, ArrowRight } from 'lucide-react';
+import Img from "@/components/Img";
 
 // Data collections
 const healthServices = [
@@ -155,7 +156,7 @@ const HealthSecurity = () => (
               </ul>
             </div>
             <div className="rounded-xl overflow-hidden shadow-lg">
-              <img loading="lazy" decoding="async" src="/img/faci/cctv.webp" alt="Security monitoring center" className="object-cover h-full w-full" />
+              <Img src="/img/faci/cctv.webp" alt="A wall-mounted CCTV camera covering the grounds at Sandhyaneed" sizes="(min-width: 768px) 50vw, 100vw" className="object-cover h-full w-full" />
             </div>
           </div>
 

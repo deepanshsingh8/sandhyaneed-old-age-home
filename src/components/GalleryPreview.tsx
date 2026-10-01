@@ -1,6 +1,7 @@
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import Img from "@/components/Img";
 
 const GalleryPreview = () => {
   const images = [
@@ -14,7 +15,7 @@ const GalleryPreview = () => {
     <section className="py-12 sm:py-16 md:py-24 relative overflow-hidden bg-sandhya-purple bg-opacity-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-8 md:mb-16">
-          <span className="inline-block px-4 py-1 bg-purple-500 text-white rounded-full text-sm font-medium mb-4">
+          <span className="inline-block px-4 py-1 bg-purple-700 text-white rounded-full text-sm font-medium mb-4">
             Our Gallery
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4">
@@ -33,9 +34,10 @@ const GalleryPreview = () => {
               className="rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 group"
             >
               <div className="relative aspect-[4/3] sm:aspect-auto sm:h-64">
-                <img loading="lazy" decoding="async"
+                <Img
                   src={image.src}
                   alt={image.alt}
+                  sizes="(min-width: 1024px) 25vw, 50vw"
                   className="object-cover h-full w-full group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">

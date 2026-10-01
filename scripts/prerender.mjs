@@ -1,11 +1,15 @@
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { mkdir, readFile, readdir, writeFile } from "node:fs/promises";
 import { resolve, dirname } from "node:path";
 import { createServer } from "vite";
 
 const server = await createServer({ server: { middlewareMode: true, hmr: false, ws: false }, appType: "custom" });
 try {
   const { render, pageSEO, site } = await server.ssrLoadModule("/src/entry-server.tsx");
-  const template = await readFile(resolve("dist/index.html"), "utf8");
+  // Preload the self-hosted heading font (latin subset) so headings don't swap late.
+  const font = (await readdir(resolve("dist/assets"))).find(file => /^playfair-display-latin-wght-normal-.*\.woff2$/.test(file));
+  if (!font) throw new Error("Playfair Display latin font not found in dist/assets");
+  const template = (await readFile(resolve("dist/index.html"), "utf8"))
+    .replace("</head>", () => `  <link rel="preload" href="/assets/${font}" as="font" type="font/woff2" crossorigin />\n  </head>`);
   const paths = Object.keys(pageSEO);
   const indexablePaths = paths.filter(path => !pageSEO[path].noindex);
   for (const path of [...paths, "/404"]) {

@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import ContactCTA from "@/components/ContactCTA";
 import { Activity, Music, PartyPopper, Users, Heart, Brain, Smile } from "lucide-react";
 import { LucideProps } from "lucide-react";  // Import LucideProps for TypeScript
+import Img from "@/components/Img";
 
 const Activities: React.FC = () => {
   // Data
@@ -125,7 +126,7 @@ const Activities: React.FC = () => {
                 <List items={data.dailyActivities} />
               </div>
               <div className="rounded-xl overflow-hidden shadow-lg">
-                <img loading="lazy" decoding="async" src="/img/events/aarti.webp" alt="Residents engaged in daily activities" className="object-cover h-full w-full" />
+                <Img src="/img/events/aarti.webp" alt="Residents gathered under the temple arch at Sandhyaneed" sizes="(min-width: 768px) 50vw, 100vw" className="object-cover h-full w-full" />
               </div>
             </div>
 
