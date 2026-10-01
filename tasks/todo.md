@@ -39,7 +39,8 @@
 - [x] Defer hidden hero slides until after hydration (they were competing with the LCP image)
 - [x] Hero CTAs: JS `onClick` buttons → crawlable `<a href>` links
 - [x] Correct inaccurate gallery captions/alt text (e.g. "Morning walk" photo shows no walk)
-- [ ] (needs OK) push → Vercel deploy → Search Console: resubmit sitemap, inspect URLs, review indexing/404 reports
+- [x] Pushed to main → Vercel deploy verified live
+- [x] Search Console: submitted https://www.sandhyaneed.com/sitemap.xml (was never submitted); inspected all 8 URLs; requested indexing for /, /facilities, /about, /activities, /contact, /gallery (daily quota hit before /rules, /health-security)
 
 ## Review
 
@@ -56,3 +57,17 @@ JS 152 → 114 KB gzip. CLS 0 everywhere. SEO 100 before and after (it was alrea
 Remaining LCP is mostly the JS bundle sharing bandwidth in the slow-4G simulation; next lever would be route-level code splitting (needs streaming SSR in prerender) — not done, diminishing returns.
 
 Not done / not possible from code: Forbes backlink, guaranteed #1 ranking, apex http→https→www 2-hop (Vercel platform behaviour).
+
+### Live Lighthouse (mobile), before → after deploy
+
+| Page | Perf | FCP | LCP | Weight |
+|---|---|---|---|---|
+| Home | 83 → 94 | 2.8 → 1.8 s | 3.4 → 2.5 s | 779 → 456 KiB |
+| About | 89 → 99 | 2.8 → 1.6 s | 2.8 → 1.8 s | 216 → 179 KiB |
+| Gallery | 88 → 97 | 2.8 → 1.8 s | 2.9 → 2.2 s | 3068 → 779 KiB |
+
+### Search Console findings (2026-10-01) — action needed outside this repo
+
+1. **Duplicate site on sandhyaneed.flux8labs.com** (old Netlify deploy behind Cloudflare, not updated from this repo). Google chose it as canonical for /about and /health-security, so those pages aren't indexed for sandhyaneed.com. Fix: 301-redirect `sandhyaneed.flux8labs.com/*` → `https://www.sandhyaneed.com/:splat` (Netlify `_redirects` on that site or a Cloudflare redirect rule), or delete it. Then request indexing for /about and /health-security.
+2. **Leftover spam from a past hack**: ~11K not-indexed URLs (casino pages under sandhyaneed.com, first seen 2026-08-05) and spam sitemaps `staging.sandhyaneed.com/hiroshi.php?sitemap.xml`, `item.php?sitemap*.xml`, `sandhyaneed.com/sitemap799.xml`. All now 404 / staging host no longer resolves; property has one owner, no security issues or manual actions. Remove the spam sitemap entries from Search Console → Sitemaps; Google drops the 404s over time.
+3. Re-request indexing for /rules and /health-security tomorrow (quota).
