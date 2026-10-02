@@ -31,7 +31,7 @@ export default function Contact() {
                 <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-teal-800/5 text-teal-800"><MapPin className="h-5 w-5" aria-hidden="true" /></span>
                 <div className="min-w-0">
                   <h3 className="mb-2 text-sm font-semibold text-stone-900">Visit us</h3>
-                  <address className="not-italic text-sm leading-relaxed text-stone-600">Sandhyaneed Old Age Home<br />{site.streetAddress}<br />Rajasthan, India</address>
+                  <address className="not-italic text-sm leading-relaxed text-stone-600">Sandhyaneed Old Age Home<br />{site.streetAddress}<br />{site.region} {site.postalCode}, India</address>
                   <a href={site.mapsUrl} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex min-h-8 items-center gap-1 text-sm font-medium text-teal-800 hover:underline">Find us on Google Maps <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" /></a>
                 </div>
               </section>

@@ -48,6 +48,8 @@ for (const pathname of paths) {
     assert.equal(business.email, "contact@sandhyaneed.com");
     assert.ok(html.includes(business.email), "Business email must be visible in the page");
     assert.equal(business.address.addressLocality, "Dhodsar");
+    assert.equal(business.address.postalCode, "303712", "PIN code matches the Google Business Profile");
+    assert.ok(business.geo?.latitude && business.geo?.longitude, "Map coordinates in structured data");
     assert.ok(!business.aggregateRating, "Do not add unsupported rating markup");
     assert.equal(business.founder?.name, "Dr. N. C. Lunayach", "Founder in structured data");
     if (pathname === "/") {

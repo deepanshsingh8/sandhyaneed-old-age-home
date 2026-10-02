@@ -11,6 +11,9 @@ export const site = {
   streetAddress: "Dhodsar Village, Jaipur-Sikar Highway",
   locality: "Dhodsar",
   region: "Rajasthan",
+  postalCode: "303712",
+  // Pin of the Google Business Profile listing.
+  geo: { latitude: 27.298156, longitude: 75.6192291 },
   mapsUrl: "https://maps.app.goo.gl/Xq9AU7hc2Hp7UoVP8",
   officeHours: "Monday - Saturday: 9:00 AM - 5:00 PM",
   visitingHours: "Daily: 10:00 AM - 7:00 PM",

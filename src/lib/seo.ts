@@ -101,9 +101,11 @@ export function getStructuredData(path: string) {
         streetAddress: site.streetAddress,
         addressLocality: site.locality,
         addressRegion: site.region,
+        postalCode: site.postalCode,
         addressCountry: "IN",
       },
       areaServed: ["Jaipur", "Rajasthan"],
+      geo: { "@type": "GeoCoordinates", ...site.geo },
       hasMap: site.mapsUrl,
       contactPoint: [
         { "@type": "ContactPoint", telephone: "+919680147319", contactType: "admission enquiries" },

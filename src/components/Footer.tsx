@@ -54,7 +54,7 @@ const Footer = () => {
             <div className="flex items-start space-x-3 mb-4">
               <MapPin size={18} className="text-sandhya-black flex-shrink-0 mt-1" />
               <p className="text-sm text-gray-600 leading-relaxed">
-                Sandhyaneed Old Age Home<br />Dhodsar Village<br />Jaipur-Sikar Highway<br />Rajasthan, India
+                Sandhyaneed Old Age Home<br />Dhodsar Village<br />Jaipur-Sikar Highway<br />Rajasthan 303712, India
               </p>
             </div>
             <div className="flex items-center space-x-3">
